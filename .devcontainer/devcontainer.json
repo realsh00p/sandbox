@@ -1,0 +1,8 @@
+{
+    "name": "sandbox",
+    "dockerFile": "Dockerfile",
+    "extensions": [
+        "llvm-vs-code-extensions.vscode-clangd"
+    ],
+    "runArgs": [ "--cap-add=SYS_NICE" ]
+}

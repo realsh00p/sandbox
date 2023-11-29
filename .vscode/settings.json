@@ -1,0 +1,6 @@
+{
+	"editor.formatOnSave": true,
+	"files.insertFinalNewline": true,
+	"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+	"clangd.path": "/usr/bin/clangd-15"
+}
