@@ -1,22 +1,6 @@
 #include "visitor.hpp"
 
-#include <array>
-#include <iostream>
-#include <variant>
-
 namespace visitor {
-
-struct A {
-    void do_thing() {
-        std::cout << "A::do_thing\n";
-    }
-};
-
-struct B {
-    void do_thing() {
-        std::cout << "B::do_thing\n";
-    }
-};
 
 template <typename T>
 void visitor(T &&arg) {
@@ -25,19 +9,9 @@ void visitor(T &&arg) {
         arg.t::do_thing();
 }
 
-void run() {
-    using Variant = std::variant<std::monostate, A, B>;
-
-    std::array<Variant, 1024> array {};
-    std::size_t n {0};
-
-    array[n++] = A();
-    array[n++] = A();
-    array[n++] = B();
-    array[n++] = B();
-
-    for (std::size_t i = 0; i < n; i++) {
-        std::visit([](auto &&arg) { visitor(arg); }, array.at(i));
+void run(Run &run) {
+    for (std::size_t i = 0; i < run.n; i++) {
+        std::visit([](auto &&arg) { visitor(arg); }, run.array.at(i));
     }
 }
 

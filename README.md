@@ -7,7 +7,7 @@ CPU Caches:
   L1 Instruction 32 KiB (x6)
   L2 Unified 256 KiB (x6)
   L3 Unified 12288 KiB (x1)
-Load Average: 0.02, 0.06, 0.06
-BM_virtualized        611 ns          611 ns      1026190
-BM_visitor            296 ns          296 ns      2381771
+Load Average: 0.40, 0.21, 0.11
+BM_virtualized      34339 ns        34339 ns        20518
+BM_visitor          34523 ns        34462 ns        20257
 ```
