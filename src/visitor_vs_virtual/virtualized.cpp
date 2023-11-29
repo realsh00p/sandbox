@@ -6,18 +6,18 @@
 namespace virtualized {
 
 struct Base {
-    virtual void do_thing(int datum = 0) = 0;
+    virtual void do_thing() = 0;
 };
 
 struct A : public Base {
-    void do_thing(int datum) override {
-        asm volatile("" : "+r"(datum));
+    void do_thing() override {
+        std::cout << "A::do_thing\n";
     }
 };
 
 struct B : public Base {
-    void do_thing(int datum) override {
-        asm volatile("" : "+r"(datum));
+    void do_thing() override {
+        std::cout << "B::do_thing\n";
     }
 };
 

@@ -1,6 +1,5 @@
 # sandbox
 ```
-2023-11-29T20:22:45+00:00
 Running ./bin/visitor_vs_virtual
 Run on (12 X 3696 MHz CPU s)
 CPU Caches:
@@ -8,10 +7,7 @@ CPU Caches:
   L1 Instruction 32 KiB (x6)
   L2 Unified 256 KiB (x6)
   L3 Unified 12288 KiB (x1)
-Load Average: 0.10, 0.09, 0.08
----------------------------------------------------------
-Benchmark               Time             CPU   Iterations
----------------------------------------------------------
-BM_virtualized        347 ns          347 ns      2008317
-BM_visitor           33.4 ns         33.4 ns     20928489
+Load Average: 0.02, 0.06, 0.06
+BM_virtualized        611 ns          611 ns      1026190
+BM_visitor            296 ns          296 ns      2381771
 ```

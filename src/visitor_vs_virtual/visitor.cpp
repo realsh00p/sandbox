@@ -7,14 +7,14 @@
 namespace visitor {
 
 struct A {
-    void do_thing(int datum = 0) {
-        asm volatile("" : "+r"(datum));
+    void do_thing() {
+        std::cout << "A::do_thing\n";
     }
 };
 
 struct B {
-    void do_thing(int datum = 0) {
-        asm volatile("" : "+r"(datum));
+    void do_thing() {
+        std::cout << "B::do_thing\n";
     }
 };
 
