@@ -3,15 +3,17 @@
 
 #include <benchmark/benchmark.h>
 
+static constexpr auto N = 65535;
+
 static void BM_virtualized(benchmark::State &state) {
-    virtualized::Run run;
+    static virtualized::Run<N> run;
     for (auto _ : state)
         virtualized::run(run);
 }
 BENCHMARK(BM_virtualized);
 
 static void BM_visitor(benchmark::State &state) {
-    visitor::Run run;
+    static visitor::Run<N> run;
     for (auto _ : state)
         visitor::run(run);
 }
