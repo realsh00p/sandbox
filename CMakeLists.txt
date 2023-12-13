@@ -11,3 +11,4 @@ conan_basic_setup()
 
 find_package(benchmark REQUIRED)
 add_subdirectory(src/visitor_vs_virtual)
+add_subdirectory(src/rearrange_bits)
