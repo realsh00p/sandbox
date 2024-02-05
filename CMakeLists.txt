@@ -10,5 +10,7 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 find_package(benchmark REQUIRED)
+find_package(GTest REQUIRED)
+add_subdirectory(src/app_factory)
 add_subdirectory(src/visitor_vs_virtual)
 add_subdirectory(src/rearrange_bits)
