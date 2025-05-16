@@ -17,32 +17,23 @@ RUN DEBIAN_FRONTEND=noninteractive \
     libtool \
     ninja-build \
     libssl-dev \
-    ruby \
-    ruby-dev \
-    rubygems \
     software-properties-common \
     sudo \
     python3 \
     python3-pip \
+    python3-venv \
     vim \
-    wget
+    wget \
+    texlive \
+    latexmk \
+    texlive-latex-extra \
+    texlive-fonts-extra \
+    pkg-config
 
 WORKDIR /tmp
-RUN wget --no-check-certificate 'https://apt.llvm.org/llvm-snapshot.gpg.key'
-RUN apt-key add llvm-snapshot.gpg.key
-RUN apt-add-repository "deb http://apt.llvm.org/bookworm/ llvm-toolchain-bookworm-15 main"
-
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get update && \
-    apt-get install -y \
-    # Clang and co \
-    clang-15 \
-    clang-tidy-15 \
-    clang-format-15 \
-    clangd-15
+RUN wget https://apt.llvm.org/llvm.sh && chmod +x llvm.sh && ./llvm.sh 19
 
 RUN pip3 install --break-system-packages conan==1.60.1
-RUN gem install cucumber
 
 RUN useradd -m -s /bin/bash -G sudo -p 'user' user
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
@@ -56,10 +47,11 @@ RUN conan profile new clang ; \
     conan profile update settings.arch=x86_64 clang && \
     conan profile update settings.arch_build=x86_64 clang && \
     conan profile update settings.compiler=clang clang && \
-    conan profile update settings.compiler.version=15 clang && \
+    conan profile update settings.compiler.version=19 clang && \
     conan profile update settings.compiler.libcxx=libstdc++11 clang && \
-    conan profile update env.CC=/usr/bin/clang-15 clang && \
-    conan profile update env.CXX=/usr/bin/clang++-15 clang
+    conan profile update settings.cucumber-cpp:build_type=Release clang && \
+    conan profile update env.CC=/usr/bin/clang-19 clang && \
+    conan profile update env.CXX=/usr/bin/clang++-19 clang
 
 RUN conan profile new gnu ; \
     conan profile update settings.os=Linux gnu && \
@@ -69,6 +61,7 @@ RUN conan profile new gnu ; \
     conan profile update settings.compiler=gcc gnu && \
     conan profile update settings.compiler.version=11 gnu && \
     conan profile update settings.compiler.libcxx=libstdc++11 gnu && \
+    conan profile update settings.cucumber-cpp:build_type=Release gnu && \
     conan profile update env.CC=/usr/bin/gcc-11 gnu && \
     conan profile update env.CXX=/usr/bin/g++-11 gnu
 

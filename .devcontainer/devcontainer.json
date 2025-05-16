@@ -1,8 +1,30 @@
 {
-    "name": "sandbox",
+    "name": "v7",
     "dockerFile": "Dockerfile",
-    "extensions": [
-        "llvm-vs-code-extensions.vscode-clangd"
+    "containerEnv": {
+        "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+        "DISPLAY": ":0"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "llvm-vs-code-extensions.vscode-clangd",
+                "ms-python.python",
+                "twxs.cmake",
+                "James-Yu.latex-workshop"
+            ]
+        }
+    },
+    "runArgs": [
+        "--network=host",
+        "--add-host=host.docker.internal:host-gateway",
+        "--security-opt", "apparmor:unconfined",
+        "--privileged"
     ],
-    "runArgs": [ "--cap-add=SYS_NICE" ]
+    "mounts": [
+        "source=/home/fredriki/code/realsh00p/workspaces/sandbox,target=/workspaces/workspace,type=bind,consistency=cached",
+        "source=/home/fredriki/code/realsh00p/sandbox,target=/workspaces/sandbox,type=bind,consistency=cached",
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+        "source=/run/user/1000/bus,target=/run/user/1000/bus,type=bind,consistency=cached"
+    ]
 }
